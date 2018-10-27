@@ -23,15 +23,15 @@ AuroraParser.parseAuroraActivityData = rawData => {
     longitudes = latitude.replace(/\s{2,}/g, ',').split(',');
     longitudes.shift();
     dataPoints.push(longitudes);
-  });
-  return dataPoints.reverse();
+  }).reverse();
+  return dataPoints;
 }
 
 AuroraParser.createJSONObject = data => {
   let dataPoints = [];
-  data.reverse().forEach((latitude, lat) => {
+  data.forEach((latitude, lat) => {
     let latDegreePoint = (180 / data.length);
-    let latDegree = -90 + ((latDegreePoint / 2) + (lat * latDegreePoint));
+    let latDegree = 90 - ((latDegreePoint / 2) + (lat * latDegreePoint));
     let lons = [];
     latitude.forEach((longitude, lon) => {
       let lonDegreePoint = (360 / latitude.length);
