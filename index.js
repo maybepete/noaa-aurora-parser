@@ -8,6 +8,11 @@ let AuroraParser = {};
 
 AuroraParser.version = require('./package.json').version;
 
+AuroraParser.UTCDateObject = date => {
+  let d = new Date(date);
+  return new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()));
+}
+
 AuroraParser.parseAuroraActivityData = rawData => {
   let data = rawData.split('#');
   data = data[data.length - 1].replace(/\n/, '');
@@ -45,8 +50,8 @@ AuroraParser.createJSONObject = data => {
 }
 
 AuroraParser.parseData = rawData => {
-  let validAt = body.match(validAtRegex)[1];
-  let generatedAt = body.match(generatedAtRegex)[1];
+  let validAt = AuroraParser.UTCDateObject(body.match(validAtRegex)[1]);
+  let generatedAt = AuroraParser.UTCDateObject(body.match(generatedAtRegex)[1]);
   let data = AuroraParser.parseAuroraActivityData(rawData);
   return {
     validAt: validAt,
