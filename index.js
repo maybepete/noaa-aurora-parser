@@ -50,8 +50,8 @@ AuroraParser.createJSONObject = data => {
 }
 
 AuroraParser.parseData = rawData => {
-  let validAt = AuroraParser.UTCDateObject(body.match(validAtRegex)[1]);
-  let generatedAt = AuroraParser.UTCDateObject(body.match(generatedAtRegex)[1]);
+  let validAt = AuroraParser.UTCDateObject(rawData.match(validAtRegex)[1]);
+  let generatedAt = AuroraParser.UTCDateObject(rawData.match(generatedAtRegex)[1]);
   let data = AuroraParser.parseAuroraActivityData(rawData);
   return {
     validAt: validAt,
