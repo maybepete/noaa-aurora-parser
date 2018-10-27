@@ -23,8 +23,8 @@ AuroraParser.parseAuroraActivityData = rawData => {
     longitudes = latitude.replace(/\s{2,}/g, ',').split(',');
     longitudes.shift();
     dataPoints.push(longitudes);
-  }).reverse();
-  return dataPoints;
+  });
+  return dataPoints.reverse();
 }
 
 AuroraParser.createJSONObject = data => {
